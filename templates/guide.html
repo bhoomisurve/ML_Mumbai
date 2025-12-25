@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% block title %}User Guide - GardenAI Advisor{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-10 mx-auto">
+        <h2 class="mb-4"><i class="bi bi-book"></i> User Guide</h2>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <h4><i class="bi bi-1-circle"></i> Getting Started</h4>
+                <p>GardenAI Advisor helps you identify plant diseases and provides personalized care recommendations for your home garden.</p>
+                <ol>
+                    <li>Select your preferred language from the dropdown</li>
+                    <li>Choose your plant type or use auto-detect</li>
+                    <li>Upload a clear photo of your plant's leaves</li>
+                    <li>Click "Analyze Plant" to get instant results</li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <h4><i class="bi bi-camera"></i> Best Practices for Photos</h4>
+                <ul>
+                    <li><strong>Lighting:</strong> Take photos in natural daylight for best results</li>
+                    <li><strong>Focus:</strong> Ensure leaves are in clear focus</li>
+                    <li><strong>Distance:</strong> Capture close-up shots of affected areas</li>
+                    <li><strong>Background:</strong> Use a plain background when possible</li>
+                    <li><strong>Multiple angles:</strong> If unclear, analyze from different angles</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <h4><i class="bi bi-tree"></i> Supported Plants</h4>
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul>
+                            <li>Apple</li>
+                            <li>Cherry</li>
+                            <li>Corn</li>
+                            <li>Grape</li>
+                            <li>Peach</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul>
+                            <li>Pepper</li>
+                            <li>Potato</li>
+                            <li>Strawberry</li>
+                            <li>Tomato</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <h4><i class="bi bi-translate"></i> Language Support</h4>
+                <p>GardenAI Advisor supports 10+ Indian languages:</p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul>
+                            <li>English</li>
+                            <li>Hindi (हिंदी)</li>
+                            <li>Tamil (தமிழ்)</li>
+                            <li>Telugu (తెలుగు)</li>
+                            <li>Bengali (বাংলা)</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul>
+                            <li>Marathi (मराठी)</li>
+                            <li>Gujarati (ગુજરાતી)</li>
+                            <li>Kannada (ಕನ್ನಡ)</li>
+                            <li>Malayalam (മലയാളം)</li>
+                            <li>Punjabi (ਪੰਜਾਬੀ)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <h4><i class="bi bi-shield-check"></i> Understanding Results</h4>
+                <p><strong>Confidence Score:</strong> Shows how certain the AI is about the detection (0-100%)</p>
+                <ul>
+                    <li><strong>90-100%:</strong> Very confident - follow recommendations</li>
+                    <li><strong>70-90%:</strong> Confident - good accuracy</li>
+                    <li><strong>Below 70%:</strong> Consider taking another photo or consulting expert</li>
+                </ul>
+                <p><strong>Healthy Plants:</strong> Receive care tips for maintaining health</p>
+                <p><strong>Diseased Plants:</strong> Get treatment options and prevention strategies</p>
+            </div>
+        </div>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <h4><i class="bi bi-exclamation-triangle"></i> Important Disclaimers</h4>
+                <div class="alert alert-warning">
+                    <ul class="mb-0">
+                        <li>All recommendations are advisory only</li>
+                        <li>Consult local gardening experts for critical decisions</li>
+                        <li>Test treatments on small areas first</li>
+                        <li>Follow product instructions carefully</li>
+                        <li>Results may vary based on local conditions</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <h4><i class="bi bi-question-circle"></i> Tips for Home Gardening</h4>
+                <ul>
+                    <li><strong>Regular Monitoring:</strong> Check plants weekly for early disease detection</li>
+                    <li><strong>Proper Spacing:</strong> Ensure adequate air circulation between plants</li>
+                    <li><strong>Clean Tools:</strong> Disinfect gardening tools to prevent disease spread</li>
+                    <li><strong>Quality Soil:</strong> Use good potting mix for container gardens</li>
+                    <li><strong>Water Wisely:</strong> Water at soil level, avoid wetting leaves</li>
+                    <li><strong>Organic First:</strong> Try organic solutions before chemical treatments</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="text-center">
+            <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg">
+                <i class="bi bi-arrow-right-circle"></i> Start Analyzing
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

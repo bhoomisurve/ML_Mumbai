@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}History - GardenAI Advisor{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <h2><i class="bi bi-clock-history"></i> Your Analysis History</h2>
+        <p class="text-muted">View your past plant analyses and recommendations</p>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card text-center p-3">
+            <h3 class="text-primary">{{ stats.total_detections }}</h3>
+            <p class="mb-0">Total Analyses</p>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card p-3">
+            <h5>Analyses by Plant Type</h5>
+            <div class="row">
+                {% for crop, count in stats.by_crop.items() %}
+                <div class="col-md-4 mb-2">
+                    <span class="badge bg-success">{{ crop.title() }}: {{ count }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if history %}
+<div class="row">
+    {% for item in history %}
+    <div class="col-md-6 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start mb-2">
+                    <h5 class="card-title">{{ item.crop_type.title() }}</h5>
+                    <span class="badge {% if 'Healthy' in item.disease %}badge-health{% else %}badge-disease{% endif %}">
+                        {{ item.disease }}
+                    </span>
+                </div>
+                <p class="card-text">
+                    <small class="text-muted">
+                        <i class="bi bi-calendar"></i> {{ item.timestamp.strftime('%B %d, %Y %I:%M %p') }}<br>
+                        <i class="bi bi-geo-alt"></i> {{ item.location.city }}, {{ item.location.region }}<br>
+                        <i class="bi bi-speedometer"></i> Confidence: {{ (item.confidence * 100)|round(1) }}%
+                    </small>
+                </p>
+                <a href="{{ url_for('view_detection', detection_id=item._id) }}" class="btn btn-sm btn-primary">
+                    <i class="bi bi-eye"></i> View Details
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="alert alert-info text-center">
+    <i class="bi bi-info-circle"></i> No analysis history yet. 
+    <a href="{{ url_for('index') }}">Start your first analysis!</a>
+</div>
+{% endif %}
+
+{% endblock %}

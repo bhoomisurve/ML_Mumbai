@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+
+{% block title %}Detection Report - GardenAI Advisor{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <a href="{{ url_for('history') }}" class="btn btn-secondary mb-3">
+            <i class="bi bi-arrow-left"></i> Back to History
+        </a>
+        <h2><i class="bi bi-file-earmark-medical"></i> Plant Health Report</h2>
+        <p class="text-muted">Detailed analysis and recommendations</p>
+    </div>
+</div>
+
+{% if detection %}
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card mb-3">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="bi bi-clipboard-data"></i> Detection Results</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Plant Type:</strong> {{ detection.crop_type.upper() }}</p>
+                        <p><strong>Status:</strong> 
+                            <span class="badge {% if 'Healthy' in detection.disease %}badge-health{% else %}badge-disease{% endif %}">
+                                {{ detection.disease }}
+                            </span>
+                        </p>
+                        <p><strong>Confidence:</strong> {{ (detection.confidence * 100)|round(1) }}%</p>
+                        <p><strong>Language:</strong> {{ detection.language.upper() }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Date:</strong> {{ detection.timestamp.strftime('%B %d, %Y') }}</p>
+                        <p><strong>Time:</strong> {{ detection.timestamp.strftime('%I:%M %p') }}</p>
+                        <p><strong>Location:</strong> {{ detection.location.city }}, {{ detection.location.region }}</p>
+                        <p><strong>Country:</strong> {{ detection.location.country }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% if recommendations %}
+        <div class="card mb-3">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0"><i class="bi bi-lightbulb"></i> AI Recommendations</h5>
+            </div>
+            <div class="card-body">
+                <h6>Summary</h6>
+                <p class="lead">{{ recommendations.recommendations.summary }}</p>
+                
+                {% if recommendations.recommendations.disease_info %}
+                <hr>
+                <h6><i class="bi bi-bug"></i> Disease Information</h6>
+                <p><strong>Name:</strong> {{ recommendations.recommendations.disease_info.name }}</p>
+                <p><strong>Severity:</strong> 
+                    <span class="badge bg-{% if recommendations.recommendations.disease_info.severity == 'Low' %}success{% elif recommendations.recommendations.disease_info.severity == 'Medium' %}warning{% else %}danger{% endif %}">
+                        {{ recommendations.recommendations.disease_info.severity }}
+                    </span>
+                </p>
+                <p>{{ recommendations.recommendations.disease_info.description }}</p>
+                {% endif %}
+                
+                <hr>
+                <h6><i class="bi bi-exclamation-triangle"></i> Immediate Actions</h6>
+                <ol>
+                    {% for action in recommendations.recommendations.immediate_actions %}
+                    <li>{{ action }}</li>
+                    {% endfor %}
+                </ol>
+                
+                {% if recommendations.recommendations.treatment %}
+                <hr>
+                <h6><i class="bi bi-heart-pulse"></i> Treatment Options</h6>
+                <p><strong>Organic Solutions:</strong></p>
+                <ul>
+                    {% for solution in recommendations.recommendations.treatment.organic_solutions %}
+                    <li>{{ solution }}</li>
+                    {% endfor %}
+                </ul>
+                <p><strong>Application Schedule:</strong> {{ recommendations.recommendations.treatment.application_schedule }}</p>
+                {% endif %}
+                
+                <hr>
+                <h6><i class="bi bi-droplet-fill"></i> Watering Guidelines</h6>
+                <ul>
+                    <li><strong>Frequency:</strong> {{ recommendations.recommendations.watering.frequency }}</li>
+                    <li><strong>Amount:</strong> {{ recommendations.recommendations.watering.amount }}</li>
+                    <li><strong>Best Time:</strong> {{ recommendations.recommendations.watering.timing }}</li>
+                    <li><em>{{ recommendations.recommendations.watering.weather_note }}</em></li>
+                </ul>
+                
+                {% if recommendations.recommendations.fertilization %}
+                <hr>
+                <h6><i class="bi bi-flower2"></i> Fertilization</h6>
+                <ul>
+                    <li><strong>Type:</strong> {{ recommendations.recommendations.fertilization.type }}</li>
+                    <li><strong>Dosage:</strong> {{ recommendations.recommendations.fertilization.dosage }}</li>
+                    <li><strong>Frequency:</strong> {{ recommendations.recommendations.fertilization.frequency }}</li>
+                </ul>
+                {% endif %}
+                
+                <hr>
+                <h6><i class="bi bi-bag-check"></i> Shopping List</h6>
+                <ul>
+                    {% for item in recommendations.recommendations.shopping_list %}
+                    <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+                
+                <hr>
+                <h6><i class="bi bi-shield-check"></i> Prevention Tips</h6>
+                <ul>
+                    {% for tip in recommendations.recommendations.prevention_tips %}
+                    <li>{{ tip }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    
+    <div class="col-lg-4">
+        <div class="card mb-3">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0"><i class="bi bi-cloud-sun"></i> Weather Conditions</h5>
+            </div>
+            <div class="card-body">
+                {% if recommendations and recommendations.weather_data %}
+                <p><strong>Temperature:</strong> {{ recommendations.weather_data.temperature }}°C</p>
+                <p><strong>Feels Like:</strong> {{ recommendations.weather_data.feels_like }}°C</p>
+                <p><strong>Humidity:</strong> {{ recommendations.weather_data.humidity }}%</p>
+                <p><strong>Conditions:</strong> {{ recommendations.weather_data.description.title() }}</p>
+                <p><strong>Wind Speed:</strong> {{ recommendations.weather_data.wind_speed }} m/s</p>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-body text-center">
+                <button onclick="window.print()" class="btn btn-primary mb-2 w-100">
+                    <i class="bi bi-printer"></i> Print Report
+                </button>
+                <a href="{{ url_for('index') }}" class="btn btn-success w-100">
+                    <i class="bi bi-plus-circle"></i> New Analysis
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="alert alert-warning">
+    <i class="bi bi-exclamation-triangle"></i> Detection not found.
+</div>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+
+{% block title %}About - GardenAI Advisor{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-10 mx-auto">
+        <h2 class="mb-4"><i class="bi bi-info-circle"></i> About GardenAI Advisor</h2>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <h4>Our Mission</h4>
+                <p class="lead">Empowering home gardeners and urban farmers with AI-powered plant health insights and personalized gardening recommendations.</p>
+                <p>GardenAI Advisor makes advanced agricultural technology accessible to everyone, whether you're growing vegetables on your balcony, maintaining a small kitchen garden, or cultivating plants in limited urban spaces.</p>
+            </div>
+        </div>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <h4><i class="bi bi-cpu"></i> Technology Stack</h4>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>AI & Machine Learning</h6>
+                        <ul>
+                            <li><strong>Vision AI:</strong> DenseNet-based deep learning models</li>
+                            <li><strong>Decision AI:</strong> Google Gemini for recommendations</li>
+                            <li><strong>9 Specialized Models:</strong> One for each crop type</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Backend & Storage</h6>
+                        <ul>
+                            <li><strong>Framework:</strong> Flask (Python)</li>
+                            <li><strong>Database:</strong> MongoDB Atlas</li>
+                            <li><strong>Image Processing:</strong> TensorFlow & PIL</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <h4><i class="bi bi-stars"></i> Key Features</h4>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100 border-0 bg-light">
+                            <div class="card-body">
+                                <h5><i class="bi bi-camera-fill text-primary"></i> Image Analysis</h5>
+                                <p>Advanced computer vision detects diseases with high accuracy from plant photos</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100 border-0 bg-light">
+                            <div class="card-body">
+                                <h5><i class="bi bi-geo-alt-fill text-primary"></i> Location-Based</h5>
+                                <p>Automatic location detection for region-specific recommendations</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100 border-0 bg-light">
+                            <div class="card-body">
+                                <h5><i class="bi bi-cloud-sun-fill text-primary"></i> Weather Integration</h5>
+                                <p>Real-time weather data influences watering and care advice</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100 border-0 bg-light">
+                            <div class="card-body">
+                                <h5><i class="bi bi-translate text-primary"></i> Multi-Language</h5>
+                                <p>Support for 10+ Indian languages for wider accessibility</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <h4><i class="bi bi-lightbulb"></i> How It Works</h4>
+                <ol class="lead">
+                    <li><strong>Image Upload:</strong> You upload or capture a photo of your plant</li>
+                    <li><strong>Vision Agent:</strong> AI analyzes the image using trained deep learning models</li>
+                    <li><strong>Location Agent:</strong> System detects your location and fetches weather data</li>
+                    <li><strong>Decision Agent:</strong> Gemini AI synthesizes all data to generate recommendations</li>
+                    <li><strong>Results:</strong> You receive actionable, context-aware gardening advice</li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <h4><i class="bi bi-people"></i> Who Can Benefit</h4>
+                <ul>
+                    <li><strong>Urban Gardeners:</strong> Growing plants in apartments and balconies</li>
+                    <li><strong>Home Gardeners:</strong> Maintaining kitchen gardens and small plots</li>
+                    <li><strong>Hobby Farmers:</strong> Learning sustainable gardening practices</li>
+                    <li><strong>Students:</strong> Studying plant health and agriculture</li>
+                    <li><strong>Community Gardens:</strong> Managing shared growing spaces</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <h4><i class="bi bi-shield-check"></i> Responsible AI Usage</h4>
+                <div class="alert alert-info">
+                    <p><strong>Important:</strong> GardenAI Advisor provides advisory recommendations only. Always:</p>
+                    <ul class="mb-0">
+                        <li>Test treatments on small areas first</li>
+                        <li>Follow product safety instructions</li>
+                        <li>Consult local experts for critical decisions</li>
+                        <li>Consider organic solutions before chemicals</li>
+                        <li>Monitor plant response to treatments</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <h4><i class="bi bi-graph-up"></i> Model Performance</h4>
+                <p>Our DenseNet121-based models are trained on thousands of plant images with the following characteristics:</p>
+                <ul>
+                    <li>Input size: 256x256 RGB images</li>
+                    <li>Transfer learning architecture for efficiency</li>
+                    <li>Multi-class classification per crop type</li>
+                    <li>Optimized for mobile and web deployment</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="card mb-4 bg-light">
+            <div class="card-body text-center">
+                <h4>Ready to Start?</h4>
+                <p>Upload your first plant photo and discover the power of AI-driven gardening!</p>
+                <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg">
+                    <i class="bi bi-flower1"></i> Analyze Your Plant
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
